@@ -1,10 +1,11 @@
 FROM php:8.2-cli
 
-# Install ekstensi PHP yang dibutuhkan: pdo_pgsql (Supabase/PostgreSQL), curl, mbstring
+# Install dependency sistem + ekstensi PHP yang dibutuhkan: pdo_pgsql (Supabase/PostgreSQL), curl, mbstring
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     libcurl4-openssl-dev \
-    && docker-php-ext-install pdo pdo_pgsql curl mbstring \
+    pkg-config \
+    && docker-php-ext-install pdo pdo_pgsql pgsql curl mbstring \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -16,4 +17,4 @@ COPY . .
 EXPOSE 8080
 
 # Jalankan PHP built-in server, bind ke 0.0.0.0 dan port dari Railway
-CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t ."
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t ."]
