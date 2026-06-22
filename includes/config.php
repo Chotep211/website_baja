@@ -4,15 +4,15 @@
 // Ambil dari: Supabase Dashboard → Connect → Session pooler / Transaction pooler
 
 // ─── ISI SESUAI DATA POOLER SUPABASE ANDA ────────────────────
-define('DB_HOST',     'aws-1-ap-southeast-1.pooler.supabase.com'); // Host dari tab "Connect" -> pooler
-define('DB_PORT',     '5432');                            // 5432 = session pooler, 6543 = transaction pooler
-define('DB_USER',     'postgres.bsyltelsvxspfqajpqwn');            // Username pooler (ada project ref di belakang)
-define('DB_PASS',     'PESONATEKNIK21');                    // Password database Anda
-define('DB_NAME',     'postgres');
+define('DB_HOST',getenv('DB_HOST') ?:'aws-1-ap-southeast-1.pooler.supabase.com'); // Host dari tab "Connect" -> pooler
+define('DB_PORT',getenv('DB_PORT') ?:'5432');                            // 5432 = session pooler, 6543 = transaction pooler
+define('DB_USER',getenv('DB_USER') ?:'postgres.bsyltelsvxspfqajpqwn');            // Username pooler (ada project ref di belakang)
+define('DB_PASS',getenv('DB_PASS') ?:'PESONATEKNIK21');                    // Password database Anda
+define('DB_NAME',getenv('DB_NAME') ?:'postgres');
 define('DB_CHARSET',  'utf8');
 
 // Base URL website Anda (tanpa slash di akhir)
-define('BASE_URL', 'http://localhost/website_baja');
+define('BASE_URL',getenv('BASE_URL') ?:'http://localhost/website_baja');
 // ─────────────────────────────────────────────────────────────
 
 // Path folder upload lokal (fallback, tidak dipakai lagi untuk produk)
@@ -20,9 +20,9 @@ define('UPLOAD_PRODUK', __DIR__ . '/../uploads/produk/');
 define('UPLOAD_BANNER', __DIR__ . '/../uploads/banner/');
 
 // ─── KONFIGURASI SUPABASE STORAGE (untuk upload gambar produk) ─
-define('SUPABASE_URL',        'https://bsyltelsvxspfqajpqwn.supabase.co');
-define('SUPABASE_KEY',        'sb_publishable_NJVf4TCwcQVxAseTkE_dUQ_NqE2AZJh'); // publishable/anon key
-define('SUPABASE_BUCKET',     'produk-images');
+define('SUPABASE_URL', getenv('SUPABASE_URL')?:'https://bsyltelsvxspfqajpqwn.supabase.co');
+define('SUPABASE_KEY', getenv('SUPABASE_KEY')?:'sb_publishable_NJVf4TCwcQVxAseTkE_dUQ_NqE2AZJh'); // publishable/anon key
+define('SUPABASE_BUCKET', getenv('SUPABASE_BUCKET') ?:'produk-images');
 // ─────────────────────────────────────────────────────────────
 
 // Upload file ke Supabase Storage, return URL publik atau null jika gagal
